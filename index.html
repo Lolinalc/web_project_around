@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An interactive web page where users can add, replace and rename content."
+    />
+    <meta name="author" content="Lolina López" />
+    <meta name="keywords" content="html5 css javascript tripleten" />
+
+    <link rel="stylesheet" href="/pages/index.css" />
+    <title>Alrededor de los EEUU</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img src="/images/logo.png" class="header__image" alt="logo image" />
+        <div class="header__line"></div>
+      </header>
+
+      <main>
+        <section class="profile">
+          <div class="profile__avatar">
+            <img
+              src="/images/jacques-cousteau.jpg"
+              class="profile__image"
+              alt="profile image"
+            />
+          </div>
+          <div class="profile__info">
+            <div class="profile__open-line">
+              <h1 class="profile__name">Jacques Cousteau</h1>
+              <img
+                src="/images/EditButton.png"
+                class="profile__edit-button"
+                alt="edit button"
+              />
+            </div>
+            <p class="profile__description">Explorador</p>
+          </div>
+          <button class="profile__add-button" type="button">+</button>
+        </section>
+        <div class="popup">
+          <form class="popup__form form">
+            <button class="popup__close-button" type="button">X</button>
+            <h2 class="popup__title">Editar perfil</h2>
+            <input
+              type="text"
+              class="popup__input popup__input-name"
+              id="name"
+              name="profileName"
+              required
+              placeholder="Nombre"
+            />
+            <input
+              type="text"
+              class="popup__input popup__input-description"
+              id="description"
+              name="aboutme"
+              required
+              placeholder="Acerca de mí"
+            />
+            <button type="submit" class="popup__submit-button">Guardar</button>
+          </form>
+        </div>
+        <section class="places">
+          <div class="places__cards">
+            <img
+              src="/images/ValledeYosemite.jpg"
+              class="places__image"
+              alt="Valle de Yosemite"
+            />
+            <div class="places__info">
+              <p class="places__description">Valle de Yosemite</p>
+              <img
+                src="/images/heart.png"
+                class="places__like"
+                alt="like button"
+              />
+            </div>
+          </div>
+
+          <div class="places__cards">
+            <img
+              src="/images/LagoLouise.jpg"
+              class="places__image"
+              alt="Lago Louise"
+            />
+            <div class="places__info">
+              <p class="places__description">Lago Louise</p>
+              <img
+                src="/images/heart.png"
+                class="places__like"
+                alt="like button"
+              />
+            </div>
+          </div>
+
+          <div class="places__cards">
+            <img
+              src="/images/MontañasCalvas.jpg"
+              class="places__image"
+              alt="Montañas Calvas"
+            />
+            <div class="places__info">
+              <p class="places__description">Montañas Calvas</p>
+              <img
+                src="/images/heart.png"
+                class="places__like"
+                alt="like button"
+              />
+            </div>
+          </div>
+
+          <div class="places__cards">
+            <img
+              src="/images/Latemar.jpg"
+              class="places__image"
+              alt="Latemar"
+            />
+            <div class="places__info">
+              <p class="places__description">Latemar</p>
+              <img
+                src="/images/heart.png"
+                class="places__like"
+                alt="like button"
+              />
+            </div>
+          </div>
+
+          <div class="places__cards">
+            <img
+              src="/images/VanoisNational.jpg"
+              class="places__image"
+              alt="Vanois National"
+            />
+            <div class="places__info">
+              <p class="places__description">Parque Nacional de la Vanoise</p>
+              <img
+                src="/images/heart.png"
+                class="places__like"
+                alt="like button"
+              />
+            </div>
+          </div>
+
+          <div class="places__cards">
+            <img
+              src="/images/LagodiBraies.jpg"
+              class="places__image"
+              alt="Lago di Braies"
+            />
+            <div class="places__info">
+              <p class="places__description">Lago di Braies</p>
+              <img
+                src="/images/heart.png"
+                class="places__like"
+                alt="like button"
+              />
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__text">© 2025 Around The U.S.</p>
+      </footer>
+    </div>
+    <script src="/scripts/index.js"></script>
+  </body>
+</html>

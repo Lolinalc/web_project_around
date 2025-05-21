@@ -1,0 +1,55 @@
+.places {
+  max-width: 880px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: auto;
+  padding: 40px;
+}
+
+.places__cards {
+  width: 282px;
+  height: 361px;
+  border-radius: 4px;
+  background-color: white;
+}
+.places__image {
+  width: 282px;
+  height: 282px;
+}
+.places__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto 20px;
+}
+.places__description {
+  color: black;
+  font-family: "Inter";
+  font-weight: 900;
+  font-size: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.places__like {
+  width: 21px;
+  height: 19px;
+}
+.places__like:hover {
+  cursor: pointer;
+  opacity: 50%;
+}
+.places__like:active {
+  cursor: pointer;
+  color: black;
+}
+
+@media screen and (max-width: 920px) {
+  .places {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+}

@@ -1,0 +1,21 @@
+.footer {
+  margin: auto;
+  width: 880px;
+}
+
+.footer__text {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 18px;
+  padding-bottom: 40px;
+  color: #545454;
+}
+
+@media screen and (max-width: 920px) {
+  .footer {
+    width: 282px;
+  }
+  .footer__text {
+    font-size: 14px;
+  }
+}

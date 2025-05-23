@@ -10,12 +10,13 @@
 .places__cards {
   width: 282px;
   height: 361px;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: white;
 }
 .places__image {
   width: 282px;
   height: 282px;
+  border-radius: 8px 8px 0 0;
 }
 .places__info {
   display: flex;
@@ -45,7 +46,15 @@
   color: black;
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (min-width: 768px) and (max-width: 930px) {
+  .places {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
   .places {
     display: flex;
     flex-direction: column;

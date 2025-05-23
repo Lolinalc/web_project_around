@@ -50,6 +50,9 @@
 .popup__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 14px;
 }
 .popup__submit-button {
   height: 50px;
@@ -70,6 +73,7 @@
     width: 282px;
     height: 322px;
     padding: 30px;
+    margin: auto 15px;
   }
   .popup__title {
     font-size: 18px;

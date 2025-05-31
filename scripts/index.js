@@ -1,12 +1,14 @@
-let profileEditButton = document.querySelector(".profile__edit-button");
-let popupNameTitle = document.querySelector(".popup");
-let popupCloseButton = document.querySelector(".popup__close-button");
-let profileName = document.querySelector(".profile__name");
-let inputName = document.querySelector(".popup__input-name");
-let form = document.querySelector(".popup__form");
-let profileDescription = document.querySelector(".profile__description");
-let inputDescription = document.querySelector(".popup__input-description");
-let popupSubmitButton = document.querySelector(".popup__submit-button");
+// ESTOY EN TOTAL DESACUERDO CON EL RECHAZO DE MI PROYECTO, YA QUE EN EL SPRINT 7 NOS ENSEÑAN A USAR LET Y HASTA EL SPRINT 8 NOS ENSEÑAN LA DIFERENCIA CON CONST, ASÍ QUE CREO QUE ESTO NO DEBE DE SER UN PROBLEMA EN ESTE SPRINT.
+
+const profileEditButton = document.querySelector(".profile__edit-button");
+const popupNameTitle = document.querySelector(".popup");
+const popupCloseButton = document.querySelector(".popup__close-button");
+const profileName = document.querySelector(".profile__name");
+const inputName = document.querySelector(".popup__input-name");
+const form = document.querySelector(".popup__form");
+const profileDescription = document.querySelector(".profile__description");
+const inputDescription = document.querySelector(".popup__input-description");
+const popupSubmitButton = document.querySelector(".popup__submit-button");
 
 function handleOpenPopup() {
   popupNameTitle.classList.add("popup_opened");

@@ -6,12 +6,24 @@
   margin: auto;
   padding: 40px;
 }
+.places__trash {
+  width: 18px;
+  height: 19.3px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.places__trash:hover {
+  cursor: pointer;
+  opacity: 50%;
+}
 
 .places__cards {
   width: 282px;
   height: 361px;
   border-radius: 8px;
   background-color: white;
+  position: relative;
 }
 .places__image {
   width: 282px;
@@ -36,6 +48,7 @@
 .places__like {
   width: 21px;
   height: 19px;
+  color: black;
 }
 .places__like:hover {
   cursor: pointer;
@@ -44,6 +57,7 @@
 .places__like:active {
   cursor: pointer;
   color: black;
+  fill: black;
 }
 
 @media screen and (min-width: 768px) and (max-width: 930px) {

@@ -42,7 +42,7 @@
           </div>
           <button class="profile__add-button" type="button">+</button>
         </section>
-        <div class="popup">
+        <div class="popup popup_type_edit">
           <form class="popup__form form">
             <button class="popup__close-button" type="button">X</button>
             <h2 class="popup__title">Editar perfil</h2>
@@ -65,8 +65,42 @@
             <button type="submit" class="popup__submit-button">Guardar</button>
           </form>
         </div>
+        <div class="popup popup_type_add">
+          <form class="popup__form form">
+            <button class="popup__close-button" type="button">X</button>
+            <h2 class="popup__title">Nuevo Lugar</h2>
+            <input
+              type="text"
+              class="popup__input popup__input-title"
+              id="title"
+              name="title"
+              required
+              placeholder="Tíutlo"
+            />
+            <input
+              type="text"
+              class="popup__input popup__input-link"
+              id="link"
+              name="link"
+              required
+              placeholder="Enlace de la imagen"
+            />
+            <button type="submit" class="popup__submit-button">Crear</button>
+          </form>
+        </div>
+        <div class="popup popup_type_image">
+          <button class="popup__close-button" type="button">X</button>
+          <img src="" ; class="popup__image" alt="image description" />
+          <p class="popup__image-title"></p>
+        </div>
         <section class="places">
-          <div class="places__cards">
+          <!--<div class="places__cards">
+            <img
+              src="/images/Trash.svg"
+              class="places__trash"
+              alt="trash icon"
+            />
+
             <img
               src="/images/ValledeYosemite.jpg"
               class="places__image"
@@ -84,6 +118,11 @@
 
           <div class="places__cards">
             <img
+              src="/images/Trash.svg"
+              class="places__trash"
+              alt="trash icon"
+            />
+            <img
               src="/images/LagoLouise.jpg"
               class="places__image"
               alt="Lago Louise"
@@ -99,6 +138,11 @@
           </div>
 
           <div class="places__cards">
+            <img
+              src="/images/Trash.svg"
+              class="places__trash"
+              alt="trash icon"
+            />
             <img
               src="/images/MontañasCalvas.jpg"
               class="places__image"
@@ -116,6 +160,11 @@
 
           <div class="places__cards">
             <img
+              src="/images/Trash.svg"
+              class="places__trash"
+              alt="trash icon"
+            />
+            <img
               src="/images/Latemar.jpg"
               class="places__image"
               alt="Latemar"
@@ -131,6 +180,11 @@
           </div>
 
           <div class="places__cards">
+            <img
+              src="/images/Trash.svg"
+              class="places__trash"
+              alt="trash icon"
+            />
             <img
               src="/images/VanoisNational.jpg"
               class="places__image"
@@ -148,6 +202,11 @@
 
           <div class="places__cards">
             <img
+              src="/images/Trash.svg"
+              class="places__trash"
+              alt="trash icon"
+            />
+            <img
               src="/images/LagodiBraies.jpg"
               class="places__image"
               alt="Lago di Braies"
@@ -160,7 +219,7 @@
                 alt="like button"
               />
             </div>
-          </div>
+          </div>-->
         </section>
       </main>
       <footer class="footer">

@@ -49,6 +49,14 @@
   width: 21px;
   height: 19px;
   color: black;
+  background-image: url(../images/heart.svg);
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
+}
+.places__like_active {
+  background-image: url(../images/heart-act.jpg);
 }
 .places__like:hover {
   cursor: pointer;

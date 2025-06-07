@@ -12,7 +12,6 @@ const addForm = document.querySelector(".popup_type_add .popup__form");
 const inputTitle = document.querySelector(".popup__input-title");
 const inputLink = document.querySelector(".popup__input-link");
 const placesContainer = document.querySelector(".places");
-
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -39,6 +38,7 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
   },
 ];
+const popupImage = document.querySelector(".popup_type_image");
 
 function handleOpenPopup() {
   popupNameTitle.classList.add("popup_opened");
@@ -54,19 +54,6 @@ function handleClosePopup(popup) {
   popup.classList.remove("popup_opened");
 }
 
-function toggleLike(button) {
-  button.classList.toggle("places__like_active");
-}
-
-function isValidUrl(string) {
-  try {
-    new URL(string);
-    return true;
-  } catch (_) {
-    return false;
-  }
-}
-
 function addCard(card) {
   const cardElement = document.createElement("article");
   cardElement.classList.add("places__cards");
@@ -80,6 +67,13 @@ function addCard(card) {
   cardImage.src = card.link;
   cardImage.classList.add("places__image");
   cardImage.alt = card.name;
+  cardImage.addEventListener("click", () => {
+    popupImage.classList.add("popup_opened");
+    const popupImageContent = document.querySelector(".popup__image");
+    const popupImageCaption = document.querySelector(".popup__image-title");
+    popupImageContent.src = card.link;
+    popupImageCaption.textContent = card.name;
+  });
 
   const cardInfo = document.createElement("div");
   cardInfo.classList.add("places__info");
@@ -88,10 +82,11 @@ function addCard(card) {
   cardDescription.classList.add("places__description");
   cardDescription.textContent = card.name;
 
-  const likeButton = document.createElement("img");
-  likeButton.src = "/images/heart.svg";
+  const likeButton = document.createElement("button");
   likeButton.classList.add("places__like");
-  likeButton.alt = "Botón de me gusta";
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("places__like_active");
+  });
 
   cardInfo.append(cardDescription, likeButton);
   cardElement.append(trashButton, cardImage, cardInfo);
@@ -100,22 +95,13 @@ function addCard(card) {
     cardElement.remove();
   });
 
-  likeButton.addEventListener("click", () => {
-    toggleLike(likeButton);
-    likeButton.setAttribute(
-      likeButton.classList.contains("places__like_active")
-    );
-  });
-
   placesContainer.prepend(cardElement);
 }
 
-// Renderizar tarjetas iniciales
 initialCards.forEach((card) => {
   addCard(card);
 });
 
-// Eventos
 profileEditButton.addEventListener("click", handleOpenPopup);
 popupAddButton.addEventListener("click", handleOpenAddPopup);
 
@@ -135,10 +121,6 @@ editForm.addEventListener("submit", function (event) {
 
 addForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  if (!isValidUrl(inputLink.value)) {
-    alert("Por favor, introduce un enlace válido para la imagen.");
-    return;
-  }
   const newCard = {
     name: inputTitle.value,
     link: inputLink.value,

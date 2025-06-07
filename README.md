@@ -18,8 +18,12 @@ Este es un proyecto web del curso de desarrollo web, donde se construye una pág
 - JavaScript
 - Git & GitHub
 
+## Imágenes de características del proyecto
+
+![Formulario para editar el perfil](assets/EditarPerfil.png)
+![Formulario para agregar otra card](assets/AgregarLugar.png)
+![Darle like y eliminar las cards](assets/LikeYBorrar.png)
+
 ## 🔗 Enlace al proyecto publicado
 
 [Ver el proyecto en GitHub Pages](https://lolinalc.github.io/web_project_around/)
-
-## 📂 Estructura del proyecto

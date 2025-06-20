@@ -43,49 +43,85 @@
           <button class="profile__add-button" type="button">+</button>
         </section>
         <div class="popup popup_type_edit">
-          <form class="popup__form form">
+          <form class="popup__form form" name="edit-form" novalidate>
             <button class="popup__close-button" type="button">X</button>
             <h2 class="popup__title">Editar perfil</h2>
-            <input
-              type="text"
-              class="popup__input popup__input-name"
-              id="name"
-              name="profileName"
-              required
-              placeholder="Nombre"
-            />
-            <input
-              type="text"
-              class="popup__input popup__input-description"
-              id="description"
-              name="aboutme"
-              required
-              placeholder="Acerca de mí"
-            />
-            <button type="submit" class="popup__submit-button">Guardar</button>
+
+            <div class="popup__input-container">
+              <input
+                type="text"
+                class="popup__input"
+                id="nombre"
+                name="nombre"
+                required
+                placeholder="Tu nombre"
+                minlength="2"
+                maxlength="30"
+              />
+              <span class="popup__input-error" id="nombre-error"></span>
+            </div>
+
+            <div class="popup__input-container">
+              <input
+                type="text"
+                class="popup__input"
+                id="descripcion"
+                name="description"
+                required
+                placeholder="Descripción"
+                minlength="2"
+                maxlength="30"
+              />
+              <span class="popup__input-error" id="descripcion-error"></span>
+            </div>
+
+            <button
+              type="submit"
+              class="popup__submit-button popup__submit-button_disabled"
+              disabled
+            >
+              Guardar
+            </button>
           </form>
         </div>
+
         <div class="popup popup_type_add">
-          <form class="popup__form form">
+          <form class="popup__form form" novalidate>
             <button class="popup__close-button" type="button">X</button>
             <h2 class="popup__title">Nuevo Lugar</h2>
-            <input
-              type="text"
-              class="popup__input popup__input-title"
-              id="title"
-              name="title"
-              required
-              placeholder="Tíutlo"
-            />
-            <input
-              type="text"
-              class="popup__input popup__input-link"
-              id="link"
-              name="link"
-              required
-              placeholder="Enlace de la imagen"
-            />
-            <button type="submit" class="popup__submit-button">Crear</button>
+            <div class="popup__input-container">
+              <input
+                type="text"
+                class="popup__input"
+                id="title"
+                name="title"
+                required
+                placeholder="Tíutlo"
+                minlength="2"
+                maxlenght="30"
+              />
+              <span class="popup__input-error" id="title-error"
+                >Por favor, rellena este campo.</span
+              >
+            </div>
+
+            <div class="popup__input-container">
+              <input
+                type="url"
+                class="popup__input"
+                id="link"
+                name="link"
+                required
+                placeholder="Enlace de la imagen"
+              />
+              <span class="popup__input-error" id="link-error"
+                >Por favor, introduce una dirección web.</span
+              >
+            </div>
+
+            <button type="submit" class="popup__submit-button" disabled>
+              Crear
+            </button>
           </form>
         </div>
         <div class="popup popup_type_image">
@@ -230,5 +266,6 @@
       </footer>
     </div>
     <script src="scripts/index.js"></script>
+    <script src="scripts/validate.js"></script>
   </body>
 </html>

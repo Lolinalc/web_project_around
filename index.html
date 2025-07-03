@@ -133,6 +133,29 @@
           </div>
         </div>
         <section class="places">
+          <template id="places__template">
+            <div class="places__cards">
+              <img
+                src="/images/Trash.svg"
+                class="places__trash"
+                alt="trash icon"
+              />
+
+              <img
+                src="/images/ValledeYosemite.jpg"
+                class="places__image"
+                alt="Valle de Yosemite"
+              />
+              <div class="places__info">
+                <p class="places__description">Valle de Yosemite</p>
+                <img
+                  src="/images/heart.png"
+                  class="places__like"
+                  alt="like button"
+                />
+              </div>
+            </div>
+          </template>
           <!--<div class="places__cards">
             <img
               src="/images/Trash.svg"
@@ -267,5 +290,6 @@
     </div>
     <script src="scripts/index.js"></script>
     <script src="scripts/validate.js"></script>
+    <script src="scripts/Card.js"></script>
   </body>
 </html>

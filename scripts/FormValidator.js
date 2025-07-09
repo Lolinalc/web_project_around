@@ -1,3 +1,7 @@
+class FormValidator {
+  constructor()
+}
+
 const settings = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",

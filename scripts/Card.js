@@ -1,9 +1,8 @@
-import { openPopup } from "./utils.js";
-
 export default class Card {
-  constructor(name, link, cardTemplate) {
+  constructor(name, link, cardTemplate, handleCardClick) {
     this._name = name;
     this._link = link;
+    this._handleCardClick = handleCardClick;
     this.cardTemplate = cardTemplate;
   }
 
@@ -41,15 +40,7 @@ export default class Card {
     });
 
     this.cardImage.addEventListener("click", () => {
-      const popupImage = document.querySelector(".popup_type_image");
-      const popupImageContent = popupImage.querySelector(".popup__image");
-      const popupImageCaption = popupImage.querySelector(".popup__image-title");
-
-      popupImageContent.src = this._link;
-      popupImageContent.alt = this._name;
-      popupImageCaption.textContent = this._name;
-
-      openPopup(popupImage);
+      this._handleCardClick(this._name, this._link);
     });
   }
 }

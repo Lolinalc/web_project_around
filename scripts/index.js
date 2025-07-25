@@ -1,6 +1,10 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import { openPopup, setPopupEventListeners } from "./utils.js";
+import Popup from "./Popup.js";
+import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
+import UserInfo from "./UserInfo.js";
+import Section from "./Section.js";
 
 const settings = {
   formSelector: ".popup__form",
@@ -11,14 +15,6 @@ const settings = {
   errorClass: "popup__error_visible",
 };
 
-// Iniciar validación para cada formulario
-const forms = document.querySelectorAll(settings.formSelector);
-forms.forEach((formElement) => {
-  const validator = new FormValidator(settings, formElement);
-  validator.enableValidation();
-});
-
-// Tarjetas iniciales
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -46,43 +42,70 @@ const initialCards = [
   },
 ];
 
-// Crear y mostrar tarjetas
-initialCards.forEach(({ name, link }) => {
-  const card = new Card(name, link, "#places__template");
-  const cardElement = card.generateCard();
-  document.querySelector(".places").prepend(cardElement);
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  jobSelector: ".profile__description",
 });
 
-// Configurar eventos de los popups
-setPopupEventListeners();
+const imagePopup = new PopupWithImage(".popup_type_image");
 
-// Formularios de edición y adición
-const editForm = document.querySelector(".popup_type_edit .popup__form");
-const addForm = document.querySelector(".popup_type_add .popup__form");
+function handleCardClick(name, link) {
+  imagePopup.open(name, link);
+}
 
-// Controlar el envío del formulario de edición
-editForm.addEventListener("submit", (event) => {
-  event.preventDefault(); // Prevenir recarga
-  const nameInput = editForm.querySelector("#nombre");
-  const descriptionInput = editForm.querySelector("#descripcion");
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (element) => {
+      const card = new Card(
+        element.name,
+        element.link,
+        "#places__template",
+        handleCardClick
+      );
+      return card.generateCard();
+    },
+  },
+  ".places"
+);
 
-  document.querySelector(".profile__name").textContent = nameInput.value;
-  document.querySelector(".profile__description").textContent =
-    descriptionInput.value;
-
-  closePopup(document.querySelector(".popup_type_edit"));
+const editPopup = new PopupWithForm(".popup_type_edit", (inputData) => {
+  userInfo.setUserInfo({
+    name: inputData.nombre,
+    job: inputData.description,
+  });
+});
+const addPopup = new PopupWithForm(".popup_type_add", (inputData) => {
+  const newCard = new Card(
+    inputData.title,
+    inputData.link,
+    "#places__template",
+    handleCardClick
+  );
+  const cardElement = newCard.generateCard();
+  cardSection.addItem(cardElement);
 });
 
-// Controlar el envío del formulario de añadir lugar
-addForm.addEventListener("submit", (event) => {
-  event.preventDefault(); // Prevenir recarga
-  const titleInput = addForm.querySelector("#title");
-  const linkInput = addForm.querySelector("#link");
-
-  const card = new Card(titleInput.value, linkInput.value, "#places__template");
-  const cardElement = card.generateCard();
-  document.querySelector(".places").prepend(cardElement);
-
-  closePopup(document.querySelector(".popup_type_add"));
-  addForm.reset(); // Limpiar formulario después de usar
+const forms = document.querySelectorAll(settings.formSelector);
+forms.forEach((formElement) => {
+  const validator = new FormValidator(settings, formElement);
+  validator.enableValidation();
 });
+
+editPopup.setEventListeners();
+addPopup.setEventListeners();
+imagePopup.setEventListeners();
+
+document
+  .querySelector(".profile__edit-button")
+  .addEventListener("click", () => {
+    const currentUserInfo = userInfo.getUserInfo();
+    document.querySelector("#nombre").value = currentUserInfo.name;
+    document.querySelector("#descripcion").value = currentUserInfo.job;
+    editPopup.open();
+  });
+document.querySelector(".profile__add-button").addEventListener("click", () => {
+  addPopup.open();
+});
+
+cardSection.render();

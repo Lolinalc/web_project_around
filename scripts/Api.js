@@ -35,35 +35,50 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  editProfile(name, about, avatar) {
+  editProfile(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: about,
-        avatar: avatar,
-        _id: _id,
       }),
     }).then(this._checkResponse);
   }
 
-  deleteLike(_id) {
-    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+  updateAvatar(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    }).then(this._checkResponse);
+  }
+
+  removeLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
-  likeCard(_id) {
-    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+  addLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
-  deleteCard(_id) {
-    return fetch(`${this._baseUrl}/cards/${_id}`, {
+  updateLikes(cardId, likes) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "GET",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponse);

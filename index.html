@@ -57,7 +57,7 @@
                 id="name"
                 name="name"
                 required
-                placeholder="Tu name"
+                placeholder="Tu nombre"
                 minlength="2"
                 maxlength="30"
               />
@@ -89,7 +89,7 @@
         </div>
 
         <div class="popup popup_type_add">
-          <form class="popup__form form" novalidate>
+          <form class="popup__form form" name="add-form" novalidate>
             <button class="popup__close-button" type="button">X</button>
             <h2 class="popup__title">Nuevo Lugar</h2>
             <div class="popup__input-container">
@@ -176,41 +176,34 @@
           </div>
         </div>
         <section class="places">
-          <template id="places__template">
-            <div class="places__cards">
-              <img
-                src="/images/Trash.svg"
-                class="places__trash"
-                alt="trash icon"
-              />
-
-              <img
-                src="/images/ValledeYosemite.jpg"
-                class="places__image"
-                alt="Valle de Yosemite"
-              />
-              <div class="places__info">
-                <p class="places__description">Valle de Yosemite</p>
-                <img
-                  src="/images/heart.svg"
-                  class="places__like"
-                  alt="like button"
-                />
-              </div>
-            </div>
-            <div class="popup popup_type_image">
-              <div class="popup__image-container">
-                <button class="popup__close-button" type="button">X</button>
-                <img
-                  src=""
-                  class="popup__image"
-                  alt="Descripción de la imagen"
-                />
-                <p class="popup__image-title"></p>
-              </div>
-            </div>
-          </template>
+          <div class="places__list"></div>
         </section>
+        <template id="places__template">
+          <div class="places__cards">
+            <img
+              src="/images/Trash.svg"
+              class="places__trash"
+              alt="trash icon"
+            />
+
+            <img src="" class="places__image" alt="" />
+            <div class="places__info">
+              <p class="places__description"></p>
+              <img
+                src="/images/heart.svg"
+                class="places__like"
+                alt="like button"
+              />
+            </div>
+          </div>
+          <div class="popup popup_type_image">
+            <div class="popup__image-container">
+              <button class="popup__close-button" type="button">X</button>
+              <img src="" class="popup__image" alt="Descripción de la imagen" />
+              <p class="popup__image-title"></p>
+            </div>
+          </div>
+        </template>
       </main>
       <footer class="footer">
         <p class="footer__text">© 2025 Around The U.S.</p>

@@ -3,7 +3,7 @@ import Popup from "./Popup.js";
 export default class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._confirmButton = this._popup.querySelector(".popup__confirm-button");
+    this._confirmButton = this._popup.querySelector(".popup__submit-button");
     this._confirmButtonText = this._confirmButton.textContent;
   }
   setSubmitConfirmation(handleFormSubmit) {
@@ -20,15 +20,15 @@ export default class PopupWithConfirmation extends Popup {
   renderLoading(isLoading, loadingText = "Eliminando...") {
     if (isLoading) {
       this._confirmButton.textContent = loadingText;
-      this._confirmButton.disable = true;
+      this._confirmButton.disabled = true;
     } else {
       this._confirmButton.textContent = this._confirmButtonText;
-      this._confirmButton.disable = false;
+      this._confirmButton.disabled = false;
     }
   }
   open() {
     super.open();
     this._confirmButton.textContent = this._confirmButtonText;
-    this._confirmButton.disable = false;
+    this._confirmButton.disabled = false;
   }
 }

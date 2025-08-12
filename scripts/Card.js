@@ -1,21 +1,22 @@
 export default class Card {
   constructor(
-    name,
-    link,
+    data,
+    cardTemplate,
     handleCardClick,
-    id,
-    _isLiked,
-    ownerId,
-    cardTemplate
+    handleDeleteClick,
+    handleLikeClick,
+    userId
   ) {
-    this._name = name;
-    this._link = link;
-    this._handleCardClick = handleCardClick;
-    this._id = id;
-    this._isLiked = false;
-    this._ownerId = ownerId;
-    this._createdAt = createdAt;
+    this._name = data.name;
+    this._link = data.link;
+    this._likes = data.likes || [];
+    this._id = data._id;
+    this._ownerId = data.owner._id;
+    this._userId = userId;
     this.cardTemplate = cardTemplate;
+    this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getCardElement() {
@@ -24,6 +25,26 @@ export default class Card {
       .content.querySelector(".places__cards")
       .cloneNode(true);
     return cardElement;
+  }
+
+  getId() {
+    return this._id;
+  }
+
+  _isLiked() {
+    return this._likes.some((user) => user._id === this._userId);
+  }
+
+  updateLikes(newLikes) {
+    if (this._isLiked()) {
+      this.likeButton.classList.add("places__like_active");
+    } else {
+      this.likeButton.classList.remove("places__like_active");
+    }
+  }
+
+  removeCard() {
+    this.cardElement.remove();
   }
 
   generateCard() {
@@ -37,18 +58,24 @@ export default class Card {
 
     this.cardDescription.textContent = this._name;
     this.cardImage.src = this._link;
+    this.cardImage.alt = this._name;
     this._setEventListeners();
+
+    this.updateLikes(this._likes);
+    if (this._ownerId !== this._userId) {
+      this.trashButton.style.display = "none";
+    }
 
     return this.cardElement;
   }
 
   _setEventListeners() {
     this.trashButton.addEventListener("click", () => {
-      this.cardElement.remove();
+      this._handleDeleteClick(this._id, this);
     });
 
     this.likeButton.addEventListener("click", () => {
-      this.likeButton.classList.toggle("places__like_active");
+      this._handleLikeClick(this._id, this._isLiked(), this);
     });
 
     this.cardImage.addEventListener("click", () => {

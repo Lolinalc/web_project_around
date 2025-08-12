@@ -67,9 +67,12 @@ function handleDeleteClick(cardId, card) {
   });
 }
 function handleLikeClick(cardId, isLiked, card) {
+  console.log("Like clicked", { cardId, isLiked });
   const likeMethod = isLiked ? api.removeLike(cardId) : api.addLike(cardId);
   likeMethod
     .then((updateCard) => {
+      console.log("Like response:", updatedCard);
+
       card.updateLikes(updateCard.likes);
     })
     .catch((err) => console.error(`Error: ${err}`));
@@ -78,17 +81,17 @@ function handleLikeClick(cardId, isLiked, card) {
 const editPopup = new PopupWithForm(".popup_type_edit", (inputData) => {
   editPopup.renderLoading(true);
   api
-    .editProfile(inputData.nombre, inputData.about)
+    .editProfile(inputData.name, inputData.about)
     .then((inputData) => {
       userInfo.setUserInfo({
-        name: inputData.nombre,
+        name: inputData.name,
         about: inputData.about,
         avatar: inputData.avatar,
       });
       editPopup.close();
     })
     .catch((err) => {
-      console.error(err);
+      console.error("Error en editProfile:", err);
     })
     .finally(() => {
       editPopup.renderLoading(false);
@@ -108,24 +111,103 @@ const addPopup = new PopupWithForm(".popup_type_add", (inputData) => {
     .finally(() => addPopup.renderLoading(false));
 });
 
+const avatarPopup = new PopupWithForm(".popup_type_avatar", (inputData) => {
+  avatarPopup.renderLoading(true);
+  api
+    .updateAvatar(inputData.avatar)
+    .then((inputData) => {
+      userInfo.setUserInfo({
+        name: inputData.name,
+        about: inputData.about,
+        avatar: inputData.avatar,
+      });
+      avatarPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      avatarPopup.renderLoading(false);
+    });
+});
+
+const FormValidators = {};
 const forms = document.querySelectorAll(settings.formSelector);
 forms.forEach((formElement) => {
   const validator = new FormValidator(settings, formElement);
+  const formName = formElement.getAttribute("name");
+  FormValidators[formName] = validator;
   validator.enableValidation();
 });
 
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 imagePopup.setEventListeners();
+confirmPopup.setEventListeners();
+avatarPopup.setEventListeners();
 
-document
-  .querySelector(".profile__edit-button")
-  .addEventListener("click", () => {
-    const currentUserInfo = userInfo.getUserInfo();
-    document.querySelector("#nombre").value = currentUserInfo.name;
-    document.querySelector("#descripcion").value = currentUserInfo.job;
-    editPopup.open();
-  });
-document.querySelector(".profile__add-button").addEventListener("click", () => {
+editButton.addEventListener("click", () => {
+  const currentUserInfo = userInfo.getUserInfo();
+  document.querySelector("#name").value = currentUserInfo.name;
+  document.querySelector("#about").value = currentUserInfo.job;
+
+  FormValidators["edit-form"]?.resetForm();
+  editPopup.open();
+});
+
+addButton.addEventListener("click", () => {
+  FormValidators["add-form"]?.resetForm();
   addPopup.open();
 });
+
+avatarButton.addEventListener("click", () => {
+  if (FormValidators["avatar-form"]) {
+    FormValidators["avatar-form"].resetForm();
+  }
+  avatarPopup.open();
+});
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, initialCards]) => {
+    userId = userData._id;
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+      avatar: userData.avatar,
+    });
+
+    cardList = new Section(
+      {
+        items: initialCards,
+        renderer: (item) => {
+          const cardElement = createCard(item);
+          cardList.addItem(cardElement);
+        },
+      },
+      ".places__list"
+    );
+    cardList.render();
+  })
+  .catch((err) => console.error(`Error: ${err}`));
+
+//const forms = document.querySelectorAll(settings.formSelector);
+//forms.forEach((formElement) => {
+//  const validator = new FormValidator(settings, formElement);
+//  validator.enableValidation();
+//});
+
+//editPopup.setEventListeners();
+//addPopup.setEventListeners();
+//imagePopup.setEventListeners();
+
+//document
+//  .querySelector(".profile__edit-button")
+// .addEventListener("click", () => {
+// const currentUserInfo = userInfo.getUserInfo();
+//document.querySelector("#nombre").value = currentUserInfo.name;
+//document.querySelector("#descripcion").value = currentUserInfo.job;
+//editPopup.open();
+//});
+//document.querySelector(".profile__add-button").addEventListener("click", () => {
+//addPopup.open();
+//});

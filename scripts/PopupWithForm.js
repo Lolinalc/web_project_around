@@ -5,6 +5,8 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector(".popup__form");
+    this._submitButton = this._form.querySelector(".popup__submit-button");
+    this._submitButtonText = this._submitButton.textContent;
   }
   _getInputValues() {
     const inputList = this._form.querySelectorAll(".popup__input");
@@ -14,6 +16,17 @@ export default class PopupWithForm extends Popup {
     });
     return inputValues;
   }
+
+  renderLoading(isLoading, loadingText = "Guardando...") {
+    if (isLoading) {
+      this._submitButton.textContent = loadingText;
+      this._submitButton.disabled = true;
+    } else {
+      this._submitButton.textContent = this._submitButtonText;
+      this._submitButton.disabled = false;
+    }
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
@@ -25,5 +38,10 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._form.reset();
+    this.renderLoading(false);
+  }
+  open() {
+    super.open();
+    this.renderLoading(false);
   }
 }

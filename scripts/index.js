@@ -1,8 +1,9 @@
+import { api } from "./Api.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import Popup from "./Popup.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import UserInfo from "./UserInfo.js";
 import Section from "./Section.js";
 
@@ -15,75 +16,96 @@ const settings = {
   errorClass: "popup__error_visible",
 };
 
-const initialCards = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
+let userId;
+let cardList;
+
+const editButton = document.querySelector(".profile__edit-button");
+const addButton = document.querySelector(".profile__add-button");
+const avatarButton = document.querySelector(".profile__avatar-button");
+const avatarContainer = document.querySelector(".profile__avatar");
+const nameInput = document.querySelector("#name");
+const jobInput = document.querySelector("#about");
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   jobSelector: ".profile__description",
+  avatarSelector: ".profile__image",
 });
 
 const imagePopup = new PopupWithImage(".popup_type_image");
+
+const confirmPopup = new PopupWithConfirmation(".popup_type_delete");
+
+function createCard(data) {
+  const card = new Card(
+    data,
+    "#places__template",
+    handleCardClick,
+    handleDeleteClick,
+    handleLikeClick,
+    userId
+  );
+  return card.generateCard();
+}
 
 function handleCardClick(name, link) {
   imagePopup.open(name, link);
 }
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (element) => {
-      const card = new Card(
-        element.name,
-        element.link,
-        "#places__template",
-        handleCardClick
-      );
-      return card.generateCard();
-    },
-  },
-  ".places"
-);
+function handleDeleteClick(cardId, card) {
+  confirmPopup.open();
+  confirmPopup.setSubmitConfirmation(() => {
+    confirmPopup.renderLoading(true);
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        card.removeCard();
+        confirmPopup.close();
+      })
+      .catch((err) => console.error(`Error: ${err}`))
+      .finally(() => confirmPopup.renderLoading(false));
+  });
+}
+function handleLikeClick(cardId, isLiked, card) {
+  const likeMethod = isLiked ? api.removeLike(cardId) : api.addLike(cardId);
+  likeMethod
+    .then((updateCard) => {
+      card.updateLikes(updateCard.likes);
+    })
+    .catch((err) => console.error(`Error: ${err}`));
+}
 
 const editPopup = new PopupWithForm(".popup_type_edit", (inputData) => {
-  userInfo.setUserInfo({
-    name: inputData.nombre,
-    job: inputData.description,
-  });
+  editPopup.renderLoading(true);
+  api
+    .editProfile(inputData.nombre, inputData.about)
+    .then((inputData) => {
+      userInfo.setUserInfo({
+        name: inputData.nombre,
+        about: inputData.about,
+        avatar: inputData.avatar,
+      });
+      editPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      editPopup.renderLoading(false);
+    });
 });
+
 const addPopup = new PopupWithForm(".popup_type_add", (inputData) => {
-  const newCard = new Card(
-    inputData.title,
-    inputData.link,
-    "#places__template",
-    handleCardClick
-  );
-  const cardElement = newCard.generateCard();
-  cardSection.addItem(cardElement);
+  addPopup.renderLoading(true, "Guardando...");
+  api
+    .addCard(inputData.name, inputData.link)
+    .then((newCardData) => {
+      const cardElement = createCard(newCardData);
+      cardList.addItem(cardElement);
+      addPopup.close();
+    })
+    .catch((err) => console.error(`Error: ${err}`))
+    .finally(() => addPopup.renderLoading(false));
 });
 
 const forms = document.querySelectorAll(settings.formSelector);
@@ -107,5 +129,3 @@ document
 document.querySelector(".profile__add-button").addEventListener("click", () => {
   addPopup.open();
 });
-
-cardSection.render();

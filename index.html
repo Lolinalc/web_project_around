@@ -28,6 +28,9 @@
               class="profile__image"
               alt="profile image"
             />
+            <div class="profile__avatar-overlay">
+              <button class="profile__avatar-button" type="button"></button>
+            </div>
           </div>
           <div class="profile__info">
             <div class="profile__open-line">
@@ -51,22 +54,22 @@
               <input
                 type="text"
                 class="popup__input"
-                id="nombre"
-                name="nombre"
+                id="name"
+                name="name"
                 required
-                placeholder="Tu nombre"
+                placeholder="Tu name"
                 minlength="2"
                 maxlength="30"
               />
-              <span class="popup__input-error" id="nombre-error"></span>
+              <span class="popup__input-error" id="name-error"></span>
             </div>
 
             <div class="popup__input-container">
               <input
                 type="text"
                 class="popup__input"
-                id="descripcion"
-                name="description"
+                id="about"
+                name="about"
                 required
                 placeholder="Descripción"
                 minlength="2"
@@ -94,11 +97,11 @@
                 type="text"
                 class="popup__input"
                 id="title"
-                name="title"
+                name="name"
                 required
-                placeholder="Tíutlo"
+                placeholder="Título"
                 minlength="2"
-                maxlenght="30"
+                maxlength="30"
               />
               <span class="popup__input-error" id="title-error"
                 >Por favor, rellena este campo.</span
@@ -124,6 +127,46 @@
             </button>
           </form>
         </div>
+
+        <div class="popup popup_type_delete">
+          <div class="popup__form form">
+            <button class="popup__close-button" type="button">X</button>
+            <h2 class="popup__title popup__title_delete">
+              ¿Estás seguro de que quieres eliminar esta tarjeta?
+            </h2>
+            <button class="popup__submit-button popup__submit-button_delete">
+              Sí
+            </button>
+          </div>
+        </div>
+
+        <div class="popup popup_type_avatar">
+          <form class="popup__form form" name="avatar-form" novalidate>
+            <button class="popup__close-button" type="button">X</button>
+            <h2 class="popup__title">Cambiar foto de perfil</h2>
+
+            <div class="popup__input-container">
+              <input
+                type="url"
+                class="popup__input"
+                id="avatar"
+                name="avatar"
+                required
+                placeholder="Enlace de la imagen"
+              />
+              <span class="popup__input-error" id="avatar-error"></span>
+            </div>
+
+            <button
+              type="submit"
+              class="popup__submit-button popup__submit-button_disabled"
+              disabled
+            >
+              Guardar
+            </button>
+          </form>
+        </div>
+
         <div class="popup popup_type_image">
           <div class="popup__image-container">
             <button class="popup__close-button" type="button">X</button>

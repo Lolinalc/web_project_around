@@ -1,0 +1,67 @@
+| **Tipo**      | **Quién lo inventa** | **Ejemplo** | **Explicación corta**    | **Explicación más detallada**                                                        |                                                           |
+| ------------- | -------------------- | ----------- | ------------------------ | ------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Palabra clave | JavaScript           | `const`     | Declara una constante    | No puedes reasignar su valor, pero el contenido de objetos/arrays sí se puede mutar. |                                                           |
+| Palabra clave | JavaScript           | `let`       | Declara variable mutable | Se puede reasignar, tiene alcance de bloque (`block scope`).                         |                                                           |
+| Palabra clave | JavaScript           | `var`       | Variable global o local  | Alcance de función, **no recomendado** por problemas de hoisting.                    |                                                           |
+| Palabra clave | JavaScript           | `if`        | Condicional              | Evalúa una expresión booleana                                                        | Ejecuta bloques de código solo si la condición se cumple. |
+| Palabra clave | JavaScript           | `else`      | Alternativa de `if`      | Ejecuta otro bloque si el `if` falla.                                                |                                                           |
+| Palabra clave | JavaScript           | `return`    | Salida de función        | Finaliza la ejecución de la función y regresa un valor.                              |                                                           |
+| Palabra clave | JavaScript           | `function`  | Crea función             | Bloque de código reutilizable que se puede invocar.                                  |                                                           |
+| Palabra clave | JavaScript           | `class`     | Crea clase               | Estructura para crear objetos y definir métodos de forma orientada a objetos.        |                                                           |
+| Palabra clave | JavaScript           | `try`       | Manejo de errores        | Intenta ejecutar un bloque de código que podría fallar.                              |                                                           |
+| Palabra clave | JavaScript           | `catch`     | Captura errores          | Maneja el error lanzado en el `try`.                                                 |                                                           |
+| Palabra clave | JavaScript           | `async`     | Funciones asincrónicas   | Permite usar `await` dentro de la función para trabajar con promesas.                |                                                           |
+| Palabra clave | JavaScript           | `await`     | Esperar promesa          | Hace una pausa en la ejecución hasta que la promesa se resuelva.                     |                                                           |
+
+| **Función / objeto integrado** | JavaScript | **Ejemplo**           | **Explicación corta** | **Explicación más detallada**                           |
+| ------------------------------ | ---------- | --------------------- | --------------------- | ------------------------------------------------------- |
+| Objeto                         | JavaScript | `Math`                | Funciones matemáticas | Incluye métodos como `random`, `floor`, `round`.        |
+| Método                         | JavaScript | `Math.random()`       | Número aleatorio      | Devuelve un número entre 0 (incl.) y 1 (excl.).         |
+| Función                        | JavaScript | `parseInt("42")`      | Texto a entero        | Convierte un string en número entero.                   |
+| Función                        | JavaScript | `parseFloat("3.14")`  | Texto a decimal       | Convierte string a número con decimales.                |
+| Objeto                         | JavaScript | `console`             | Mostrar info          | Contiene métodos para debug como `log`, `error`, etc.   |
+| Método                         | JavaScript | `console.log()`       | Imprime en consola    | Para mostrar mensajes o resultados de variables.        |
+| Objeto                         | JavaScript | `Date`                | Fechas                | Permite crear y manipular fechas y horas.               |
+| Método                         | JavaScript | `JSON.stringify(obj)` | Objeto a texto JSON   | Convierte un objeto en texto para enviarlo o guardarlo. |
+| Método                         | JavaScript | `JSON.parse(texto)`   | Texto JSON a objeto   | Reconstruye un objeto a partir de texto JSON.           |
+| Método                         | JavaScript | `Object.keys(obj)`    | Claves de objeto      | Devuelve un array con los nombres de las propiedades.   |
+| Método                         | JavaScript | `Object.values(obj)`  | Valores de objeto     | Devuelve un array con los valores de las propiedades.   |
+
+| **Nombre que tú defines** | Tú | **Ejemplo**                       | **Explicación corta** | **Explicación más detallada**                                                 |
+| ------------------------- | -- | --------------------------------- | --------------------- | ----------------------------------------------------------------------------- |
+| Variable                  | Tú | `const edad = 25`                 | Almacena datos        | Puedes definirla con el nombre que quieras siguiendo las reglas del lenguaje. |
+| Función                   | Tú | `function saludar() {}`           | Bloque reutilizable   | Puedes pasarle parámetros para trabajar dinámicamente.                        |
+| Clase                     | Tú | `class Persona {}`                | Plantilla de objeto   | Permite crear varios objetos con la misma estructura y comportamiento.        |
+| Objeto                    | Tú | `const usuario = {nombre: "Ana"}` | Estructura de datos   | Contiene pares clave/valor, como un mini diccionario.                         |
+| Array                     | Tú | `const lista = [1,2,3]`           | Lista de valores      | Estructura para almacenar elementos ordenados.                                |
+
+| **Parámetro recibido** | Sistema / entorno    | **Ejemplo**                    | **Explicación corta** | **Explicación más detallada**                                  |
+| ---------------------- | -------------------- | ------------------------------ | --------------------- | -------------------------------------------------------------- |
+| resolve/reject         | JavaScript (Promise) | `resolve`, `reject`            | Control promesas      | Funciones para indicar éxito o error al trabajar con promesas. |
+| event                  | Navegador            | `function manejarClick(event)` | Evento del navegador  | Información del evento que ocurrió (click, submit, etc.).      |
+| error                  | Sistema              | `catch(error)`                 | Captura errores       | Objeto con la información del error.                           |
+
+| **Tipo**  | **Ejemplo**       | **Explicación**                             |
+| --------- | ----------------- | ------------------------------------------- |
+| Number    | `42`              | Cualquier número, entero o decimal.         |
+| String    | `"Hola"`          | Texto entre comillas simples o dobles.      |
+| Boolean   | `true`, `false`   | Valores lógicos, verdadero o falso.         |
+| Null      | `null`            | Ausencia intencional de valor.              |
+| Undefined | `undefined`       | Variable declarada pero sin valor asignado. |
+| Object    | `{nombre: "Ana"}` | Conjunto de propiedades clave\:valor.       |
+| Array     | `[1, 2, 3]`       | Lista ordenada de elementos.                |
+| Function  | `function() {}`   | Bloque de código reutilizable.              |
+| Symbol    | `Symbol("id")`    | Identificador único, avanzado.              |
+| BigInt    | `123n`            | Para trabajar con enteros muy grandes.      |
+
+| **Concepto** | **Explicación**                                                                       |
+| ------------ | ------------------------------------------------------------------------------------- |
+| Hoisting     | JavaScript “sube” las declaraciones `var` o `function` al principio del bloque.       |
+| Scope        | Ámbito donde vive una variable, por ejemplo dentro de una función o bloque.           |
+| Closure      | Funciones que recuerdan el contexto en el que se crearon.                             |
+| Callback     | Función pasada como argumento a otra función.                                         |
+| Promises     | Forma de trabajar con operaciones asíncronas (por ejemplo peticiones a servidores).   |
+| Asincronía   | Código que no se ejecuta inmediatamente, sino que espera a terminar una tarea previa. |
+| DOM          | Documento HTML en forma de árbol que puede ser manipulado con JavaScript.             |
+| API          | Conjunto de funciones disponibles para interactuar con un servicio.                   |
+

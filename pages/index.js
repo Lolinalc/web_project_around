@@ -1,11 +1,11 @@
-import { api } from "./Api.js";
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import PopupWithForm from "./PopupWithForm.js";
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithConfirmation from "./PopupWithConfirmation.js";
-import UserInfo from "./UserInfo.js";
-import Section from "./Section.js";
+import { api } from "../../scripts/Api.js";
+import Card from "../../scripts/Card.js";
+import FormValidator from "../../scripts/FormValidator.js";
+import PopupWithForm from "../../scripts/PopupWithForm.js";
+import PopupWithImage from "../../scripts/PopupWithImage.js";
+import PopupWithConfirmation from "../../scripts/PopupWithConfirmation.js";
+import UserInfo from "../../scripts/UserInfo.js";
+import Section from "../../scripts/Section.js";
 
 const settings = {
   formSelector: ".popup__form",
@@ -187,25 +187,3 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     cardList.render();
   })
   .catch((err) => console.error(`Error: ${err}`));
-
-//const forms = document.querySelectorAll(settings.formSelector);
-//forms.forEach((formElement) => {
-//  const validator = new FormValidator(settings, formElement);
-//  validator.enableValidation();
-//});
-
-//editPopup.setEventListeners();
-//addPopup.setEventListeners();
-//imagePopup.setEventListeners();
-
-//document
-//  .querySelector(".profile__edit-button")
-// .addEventListener("click", () => {
-// const currentUserInfo = userInfo.getUserInfo();
-//document.querySelector("#nombre").value = currentUserInfo.name;
-//document.querySelector("#descripcion").value = currentUserInfo.job;
-//editPopup.open();
-//});
-//document.querySelector(".profile__add-button").addEventListener("click", () => {
-//addPopup.open();
-//});

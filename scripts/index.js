@@ -67,13 +67,11 @@ function handleDeleteClick(cardId, card) {
   });
 }
 function handleLikeClick(cardId, isLiked, card) {
-  console.log("Like clicked", { cardId, isLiked });
   const likeMethod = isLiked ? api.removeLike(cardId) : api.addLike(cardId);
   likeMethod
-    .then((updateCard) => {
-      console.log("Like response:", updatedCard);
-
-      card.updateLikes(updateCard.likes);
+    .then(() => {
+      card._isLiked = !isLiked;
+      card.updateLikes();
     })
     .catch((err) => console.error(`Error: ${err}`));
 }
@@ -184,7 +182,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
           cardList.addItem(cardElement);
         },
       },
-      ".places__list"
+      ".places"
     );
     cardList.render();
   })

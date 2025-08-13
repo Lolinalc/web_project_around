@@ -9,7 +9,7 @@ export default class Card {
   ) {
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes || [];
+    this._isLiked = data.isLiked;
     this._id = data._id;
     this._ownerId = data.owner._id;
     this._userId = userId;
@@ -31,12 +31,8 @@ export default class Card {
     return this._id;
   }
 
-  _isLiked() {
-    return this._likes.some((user) => user._id === this._userId);
-  }
-
-  updateLikes(newLikes) {
-    if (this._isLiked()) {
+  updateLikes() {
+    if (this._isLiked) {
       this.likeButton.classList.add("places__like_active");
     } else {
       this.likeButton.classList.remove("places__like_active");
@@ -62,9 +58,6 @@ export default class Card {
     this._setEventListeners();
 
     this.updateLikes(this._likes);
-    if (this._ownerId !== this._userId) {
-      this.trashButton.style.display = "none";
-    }
 
     return this.cardElement;
   }
@@ -75,7 +68,7 @@ export default class Card {
     });
 
     this.likeButton.addEventListener("click", () => {
-      this._handleLikeClick(this._id, this._isLiked(), this);
+      this._handleLikeClick(this._id, this._isLiked, this);
     });
 
     this.cardImage.addEventListener("click", () => {

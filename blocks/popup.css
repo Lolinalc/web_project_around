@@ -115,6 +115,12 @@
   justify-content: center;
   margin: auto;
 }
+
+.popup__image {
+  max-width: 700px;
+  max-height: 400px;
+}
+
 .popup__image-title {
   font-family: "Inter";
   font-weight: 400;
@@ -127,6 +133,11 @@
   font-size: 12px;
   color: red;
   margin-bottom: auto;
+}
+.popup__form_delete {
+  width: 500px;
+  height: 150px;
+  padding: 30px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 930px) {
@@ -143,14 +154,20 @@
     font-size: 14px;
   }
   .popup__image {
-    max-width: 700px;
+    max-width: 350px;
+  }
+  .popup__form_delete {
+    width: 400px;
+    height: 150px;
+    padding: 30px;
+    margin: auto 15px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .popup__form {
-    max-width: 282px;
-    height: 322px;
+    max-width: 25rem;
+    height: 20rem;
     padding: 30px;
     margin: auto 15px;
   }
@@ -162,5 +179,11 @@
   }
   .popup__image {
     max-width: 240px;
+  }
+  .popup__form_delete {
+    width: 300px;
+    height: 150px;
+    padding: 30px;
+    margin: auto 15px;
   }
 }
